@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/features/auth/screens/otp_screen.dart';
 import 'package:chat_app/features/auth/screens/user_information_screen.dart';
@@ -59,6 +61,20 @@ class AuthRepository {
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.message!);
+    }
+  }
+
+  void saveUserDataToFirebase({
+    required String name,
+    required File? profilePic,
+    required ProviderRef ref,
+    required BuildContext context,
+  }) async {
+    try {
+      String uid = auth.currentUser!.uid;
+      // String photoUrl =
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
     }
   }
 }
