@@ -1,17 +1,22 @@
 import 'dart:io';
 
 import 'package:chat_app/common/utils/utils.dart';
+import 'package:chat_app/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserInformationScreen extends StatefulWidget {
+class UserInformationScreen extends ConsumerStatefulWidget {
   static const routeName = '/user-information';
-  const UserInformationScreen({super.key});
+  const UserInformationScreen({
+    super.key,
+  });
 
   @override
-  State<UserInformationScreen> createState() => _UserInformationScreenState();
+  ConsumerState<UserInformationScreen> createState() =>
+      _UserInformationScreenState();
 }
 
-class _UserInformationScreenState extends State<UserInformationScreen> {
+class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
   final TextEditingController nameController = TextEditingController();
   File? image;
   @override
@@ -23,6 +28,15 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
   void selectImage() async {
     image = await pickImageFromGallery(context);
     setState(() {});
+  }
+
+  void storeUserData() async {
+    String name = nameController.text.trim();
+    if (name.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .saveUserDataToFirebase(context, name, image);
+    }
   }
 
   @override
@@ -50,7 +64,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                 bottom: -10,
                 left: 80,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: selectImage,
                   icon: const Icon(Icons.add_a_photo),
                 ),
               )
@@ -69,7 +83,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                 ),
               ),
               IconButton(
-                onPressed: selectImage,
+                onPressed: storeUserData,
                 icon: const Icon(
                   Icons.done,
                 ),

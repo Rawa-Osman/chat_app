@@ -1,3 +1,4 @@
+import 'package:chat_app/features/auth/screens/login_screen.dart';
 import 'package:chat_app/features/auth/screens/user_information_screen.dart';
 import 'package:chat_app/features/ladnding/screens/landing_screen.dart';
 import 'package:chat_app/firebase_options.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
             color: appBarColor,
           )),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: const UserInformationScreen(),
+      home: const LoginScreen(),
     );
   }
 }
