@@ -83,7 +83,9 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                 ),
               ),
               IconButton(
-                onPressed: storeUserData,
+                onPressed: storeUserData
+                // () => saveTextToFirestore('rawa')
+                ,
                 icon: const Icon(
                   Icons.done,
                 ),
