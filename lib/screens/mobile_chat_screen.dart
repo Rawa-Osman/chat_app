@@ -1,21 +1,47 @@
 import 'package:chat_app/colors.dart';
+import 'package:chat_app/common/widgets/loader.dart';
+import 'package:chat_app/features/auth/controller/auth_controller.dart';
 import 'package:chat_app/info.dart';
+import 'package:chat_app/models/user_model.dart';
 import 'package:chat_app/widgets/chat_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MobileChatScreen extends StatelessWidget {
+class MobileChatScreen extends ConsumerWidget {
   static const String routeName = '/mobile-chat-screen';
+  final String name;
+  final String uid;
 
-  const MobileChatScreen({Key? key}) : super(key: key);
+  const MobileChatScreen({
+    Key? key,
+    required this.name,
+    required this.uid,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarColor,
-        title: Text(
-          info[0]['name'].toString(),
-        ),
+        title: StreamBuilder<UserModel>(
+            stream: ref.read(authControllerProvider).userDataById(uid),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Loader();
+              }
+              return Column(
+                children: [
+                  Text(name),
+                  Text(
+                    snapshot.data!.isOnline ? 'online' : 'offline',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ],
+              );
+            }),
         centerTitle: false,
         actions: [
           IconButton(
