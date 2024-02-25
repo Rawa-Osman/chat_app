@@ -6,7 +6,7 @@ import 'package:chat_app/features/auth/screens/user_information_screen.dart';
 import 'package:chat_app/features/ladnding/screens/landing_screen.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/router.dart';
-import 'package:chat_app/screens/mobile_chat_screen.dart';
+import 'package:chat_app/features/chat/screens/mobile_chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/colors.dart';
