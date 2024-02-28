@@ -32,14 +32,14 @@ class MobileChatScreen extends ConsumerWidget {
               }
               return Column(
                 children: [
-                  // Text(name),
-                  // Text(
-                  //   snapshot.data!.isOnline ? 'online' : 'offline',
-                  //   style: TextStyle(
-                  //     fontSize: 13,
-                  //     fontWeight: FontWeight.normal,
-                  //   ),
-                  // ),
+                  Text(name),
+                  Text(
+                    snapshot.data!.isOnline ? 'online' : 'offline',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
                 ],
               );
             }),
@@ -64,7 +64,9 @@ class MobileChatScreen extends ConsumerWidget {
           const Expanded(
             child: ChatList(),
           ),
-          BottomChatField(),
+          BottomChatField(
+            recieverUserId: uid,
+          ),
         ],
       ),
     );

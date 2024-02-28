@@ -1,13 +1,14 @@
 import 'package:chat_app/colors.dart';
+import 'package:chat_app/features/chat/controller/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
-  // final String recieverUserId;
+  final String recieverUserId;
   // final bool isGroupChat;
   const BottomChatField({
     Key? key,
-    // required this.recieverUserId,
+    required this.recieverUserId,
     // required this.isGroupChat,
   }) : super(key: key);
 
@@ -23,6 +24,16 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   bool isShowEmojiContainer = false;
   bool isRecording = false;
   FocusNode focusNode = FocusNode();
+
+  void sendTextMessage() async {
+    if (isShowSendButton) {
+      ref.read(chatControllerProvider).sendTextMessage(
+          context, _messageController.text.trim(), widget.recieverUserId);
+      setState(() {
+        _messageController.text = '';
+      });
+    }
+  }
 
   // @override
   // void initState() {
@@ -136,13 +147,13 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
   //   }
   // }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _messageController.dispose();
-  //   _soundRecorder!.closeRecorder();
-  //   isRecorderInit = false;
-  // }
+  @override
+  void dispose() {
+    super.dispose();
+    _messageController.dispose();
+    // _soundRecorder!.closeRecorder();
+    isRecorderInit = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -251,8 +262,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             : Icons.mic,
                     color: Colors.white,
                   ),
-                  onTap: null,
-                  //  sendTextMessage,
+                  onTap: sendTextMessage,
                 ),
               ),
             ),
