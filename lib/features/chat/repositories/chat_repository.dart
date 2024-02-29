@@ -1,5 +1,6 @@
 import 'package:chat_app/common/enums/message_enum.dart';
 import 'package:chat_app/common/utils/utils.dart';
+import 'package:chat_app/info.dart';
 import 'package:chat_app/models/chat_contact.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:chat_app/models/user_model.dart';
@@ -45,6 +46,24 @@ class ChatRepository {
         );
       }
       return contacts;
+    });
+  }
+
+  Stream<List<Message>> getChatStream(String recieverUserId) {
+    return firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('chats')
+        .doc(recieverUserId)
+        .collection('messages')
+        .orderBy('timeSent')
+        .snapshots()
+        .map((event) {
+      List<Message> messages = [];
+      for (var document in event.docs) {
+        messages.add(Message.fromMap(document.data()));
+      }
+      return messages;
     });
   }
 
