@@ -19,7 +19,7 @@ class ChatList extends ConsumerWidget {
         stream: ref.read(chatControllerProvider).chatStream(recieverUserId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            const Loader();
+            return const Loader();
           }
           return ListView.builder(
             itemCount: snapshot.data!.length,
