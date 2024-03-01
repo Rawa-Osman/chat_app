@@ -16,8 +16,8 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
     with WidgetsBindingObserver {
   @override
   void initState() {
-    super.initState();
     WidgetsBinding.instance.addObserver(this);
+    super.initState();
   }
 
   @override
@@ -45,6 +45,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
 
   @override
   Widget build(BuildContext context) {
+    ref.read(authControllerProvider).setUserState(true);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
