@@ -58,6 +58,13 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     }
   }
 
+  void selectVideo() async {
+    File? video = await pickVideoFromGallery(context);
+    if (video != null) {
+      sendFileMessage(video, MessageEnum.video);
+    }
+  }
+
   // @override
   // void initState() {
   //   super.initState();
@@ -243,10 +250,9 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             color: Colors.grey,
                           ),
                         ),
-                        const IconButton(
-                          onPressed: null,
-                          //  selectVideo,
-                          icon: Icon(
+                        IconButton(
+                          onPressed: selectVideo,
+                          icon: const Icon(
                             Icons.attach_file,
                             color: Colors.grey,
                           ),
