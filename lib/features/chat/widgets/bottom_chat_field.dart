@@ -205,8 +205,8 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: mobileChatBoxColor,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.0),
                     child: SizedBox(
                       width: 100,
                       child: Row(
@@ -214,7 +214,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                           IconButton(
                             onPressed: null,
                             // toggleEmojiKeyboardContainer,
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.emoji_emotions,
                               color: Colors.grey,
                             ),
@@ -222,7 +222,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                           IconButton(
                             onPressed: null,
                             //  selectGIF,
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.gif,
                               color: Colors.grey,
                             ),
@@ -243,10 +243,10 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             color: Colors.grey,
                           ),
                         ),
-                        IconButton(
+                        const IconButton(
                           onPressed: null,
                           //  selectVideo,
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.attach_file,
                             color: Colors.grey,
                           ),
@@ -276,6 +276,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 backgroundColor: const Color(0xFF128C7E),
                 radius: 25,
                 child: GestureDetector(
+                  onTap: sendTextMessage,
                   child: Icon(
                     isShowSendButton
                         ? Icons.send
@@ -284,14 +285,13 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             : Icons.mic,
                     color: Colors.white,
                   ),
-                  onTap: sendTextMessage,
                 ),
               ),
             ),
           ],
         ),
         isShowEmojiContainer
-            ? SizedBox(
+            ? const SizedBox(
                 height: 310,
                 // child: EmojiPicker(
                 //   onEmojiSelected: ((category, emoji) {
