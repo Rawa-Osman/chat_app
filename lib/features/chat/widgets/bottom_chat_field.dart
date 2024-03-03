@@ -4,6 +4,7 @@ import 'package:chat_app/colors.dart';
 import 'package:chat_app/common/enums/message_enum.dart';
 import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/features/chat/controller/chat_controller.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,6 +63,31 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     File? video = await pickVideoFromGallery(context);
     if (video != null) {
       sendFileMessage(video, MessageEnum.video);
+    }
+  }
+
+  void hideEmojiContainer() {
+    setState(() {
+      isShowEmojiContainer = false;
+    });
+  }
+
+  void showEmojiContainer() {
+    setState(() {
+      isShowEmojiContainer = true;
+    });
+  }
+
+  void showKeyboard() => focusNode.requestFocus();
+  void hideKeyboard() => focusNode.unfocus();
+
+  void toggleEmojiKeyboardContainer() {
+    if (isShowEmojiContainer) {
+      showKeyboard();
+      hideEmojiContainer();
+    } else {
+      hideKeyboard();
+      showEmojiContainer();
     }
   }
 
@@ -212,16 +238,15 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: mobileChatBoxColor,
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: SizedBox(
                       width: 100,
                       child: Row(
                         children: [
                           IconButton(
-                            onPressed: null,
-                            // toggleEmojiKeyboardContainer,
-                            icon: Icon(
+                            onPressed: toggleEmojiKeyboardContainer,
+                            icon: const Icon(
                               Icons.emoji_emotions,
                               color: Colors.grey,
                             ),
@@ -297,22 +322,22 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
           ],
         ),
         isShowEmojiContainer
-            ? const SizedBox(
+            ? SizedBox(
                 height: 310,
-                // child: EmojiPicker(
-                //   onEmojiSelected: ((category, emoji) {
-                //     setState(() {
-                //       _messageController.text =
-                //           _messageController.text + emoji.emoji;
-                //     });
+                child: EmojiPicker(
+                  onEmojiSelected: ((category, emoji) {
+                    setState(() {
+                      _messageController.text =
+                          _messageController.text + emoji.emoji;
+                    });
 
-                //     if (!isShowSendButton) {
-                //       setState(() {
-                //         isShowSendButton = true;
-                //       });
-                //     }
-                //   }),
-                // ),
+                    if (!isShowSendButton) {
+                      setState(() {
+                        isShowSendButton = true;
+                      });
+                    }
+                  }),
+                ),
               )
             : const SizedBox(),
       ],
