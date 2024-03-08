@@ -137,14 +137,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
-  cupertino_list_tile:
-    dependency: transitive
-    description:
-      name: cupertino_list_tile
-      sha256: "081745577503a526b46feba753a53d7b0ba51196192c30097685f3f30297052f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.1+1"
   cupertino_progress_bar:
     dependency: transitive
     description:
@@ -173,26 +165,26 @@ packages:
     dependency: transitive
     description:
       name: enough_giphy
-      sha256: f157605230f540cbca817bd5c03e14a31acb0152b760015876d790a549b6bcae
+      sha256: "71939f18e6bbe195d8d70f2fef828dea9634258dda429f294bc9d5322fff3ae7"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.0"
+    version: "0.2.1"
   enough_giphy_flutter:
     dependency: "direct main"
     description:
       name: enough_giphy_flutter
-      sha256: b91641077b5818616bf3313cffeb34d6c91482491a5a9fae236c04e8218976d6
+      sha256: ab6786173371481f6a729a724f789f52846e9098697eb3a279b7f1e561f4e401
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.2"
+    version: "0.4.1"
   enough_platform_widgets:
     dependency: transitive
     description:
       name: enough_platform_widgets
-      sha256: f946c34f1f87821219d05603dfedcd49432925f2104876bb887c5367201e1e91
+      sha256: "2f0060cba4dd31ccb135b8d8ef4b66edd2e6fbd067ef8ae019a9511e7eb52026"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.2"
+    version: "0.7.4"
   fake_async:
     dependency: transitive
     description:
@@ -354,10 +346,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_platform_widgets
-      sha256: "81c7d0510532db7616927e75a1733d63c5f7791ca1908c83361165b18b191f5f"
+      sha256: "107d5bc9a167b4e268cba44075ee399b6b2c63d44ede28f7e8c983d7fa4b59be"
       url: "https://pub.dev"
     source: hosted
-    version: "1.20.0"
+    version: "3.3.5"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -388,10 +380,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
+      sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.6"
+    version: "1.1.0"
   http_parser:
     dependency: transitive
     description:

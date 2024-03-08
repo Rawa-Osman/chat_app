@@ -253,4 +253,52 @@ class ChatRepository {
       showSnackBar(context: context, content: e.toString());
     }
   }
+
+// "https://giphy.com/gifs/IntoAction-planet-over-profit-alternative-energy-ozone-layer-CCLWCONC2OwQYSWfgr"
+// "https://i.giphy.com/media/CCLWCONC2OwQYSWfgr/200.gif"
+  void sendGIFMessage({
+    required BuildContext context,
+    required String gifUrl,
+    required String recieverUserId,
+    required UserModel senderUser,
+    // required MessageReply? messageReply,
+    // required bool isGroupChat,
+  }) async {
+    try {
+      var timeSent = DateTime.now();
+      UserModel? recieverUserData;
+
+      // if (!isGroupChat) {
+      var userDataMap =
+          await firestore.collection('users').doc(recieverUserId).get();
+      recieverUserData = UserModel.fromMap(userDataMap.data()!);
+      // }
+
+      var messageId = const Uuid().v1();
+
+      _saveDataToContactsSubcollection(
+        senderUser,
+        recieverUserData,
+        'GIF',
+        timeSent,
+        recieverUserId,
+        // isGroupChat,
+      );
+
+      _saveMessageToMessageSubcollection(
+        recieverUserId: recieverUserId,
+        text: gifUrl,
+        timeSent: timeSent,
+        messageType: MessageEnum.gif,
+        messageId: messageId,
+        username: senderUser.name,
+        // messageReply: messageReply,
+        recieverUsername: recieverUserData.name,
+        // senderUsername: senderUser.name,
+        // isGroupChat: isGroupChat,
+      );
+    } catch (e) {
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
 }
