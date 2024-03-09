@@ -15,6 +15,12 @@ import 'package:chat_app/screens/web_layout_screen.dart';
 import 'package:chat_app/utils/responsive_layout.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// C:\Users\rawa>flutter --version
+// Flutter 3.13.9 • channel stable • https://github.com/flutter/flutter.git
+// Framework • revision d211f42860 (5 months ago) • 2023-10-25 13:42:25 -0700
+// Engine • revision 0545f8705d
+// Tools • Dart 3.1.5 • DevTools 2.25.0
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
