@@ -50,7 +50,7 @@ class MyMessageCard extends StatelessWidget {
                 Padding(
                   padding: type == MessageEnum.text
                       ? const EdgeInsets.only(
-                          left: 10,
+                          left: 25,
                           right: 30,
                           top: 5,
                           bottom: 20,
@@ -103,7 +103,7 @@ class MyMessageCard extends StatelessWidget {
                       Text(
                         date,
                         style: const TextStyle(
-                          fontSize: 13,
+                          fontSize: 10,
                           color: Colors.white60,
                         ),
                       ),
@@ -112,7 +112,7 @@ class MyMessageCard extends StatelessWidget {
                       ),
                       Icon(
                         isSeen ? Icons.done_all : Icons.done,
-                        size: 20,
+                        size: 15,
                         color: isSeen ? Colors.blue : Colors.white60,
                       ),
                     ],

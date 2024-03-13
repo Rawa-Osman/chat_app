@@ -60,7 +60,8 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
             widget.isGroupChat,
           );
       setState(() {
-        _messageController.text = '';
+        _messageController.clear();
+        isShowSendButton = !isShowSendButton;
       });
     } else {
       var tempDir = await getTemporaryDirectory();
