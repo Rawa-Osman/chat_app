@@ -1,3 +1,5 @@
+import 'package:chat_app/common/enums/message_enum.dart';
+import 'package:chat_app/common/providers/message_replay_provider.dart';
 import 'package:chat_app/common/widgets/loader.dart';
 import 'package:chat_app/features/chat/controller/chat_controller.dart';
 import 'package:chat_app/features/chat/widgets/my_message_card.dart';
@@ -12,7 +14,12 @@ import 'package:intl/intl.dart';
 
 class ChatList extends ConsumerStatefulWidget {
   final String recieverUserId;
-  const ChatList({required this.recieverUserId, Key? key}) : super(key: key);
+  final bool isGroupChat;
+  const ChatList({
+    Key? key,
+    required this.recieverUserId,
+    required this.isGroupChat,
+  }) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChatListState();
@@ -20,17 +27,38 @@ class ChatList extends ConsumerStatefulWidget {
 
 class _ChatListState extends ConsumerState<ChatList> {
   final ScrollController messageController = ScrollController();
+
   @override
   void dispose() {
-    // TODO: implement dispose
-    messageController.dispose();
     super.dispose();
+    messageController.dispose();
+  }
+
+  void onMessageSwipe(
+    String message,
+    bool isMe,
+    MessageEnum messageEnum,
+  ) {
+    ref.read(messageReplyProvider.notifier).update(
+          (state) => MessageReply(
+            message,
+            isMe,
+            messageEnum,
+          ),
+        );
+    print('test');
+    print('object');
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Message>>(
         stream:
+            //  widget.isGroupChat
+            // ? ref
+            //     .read(chatControllerProvider)
+            //     .groupChatStream(widget.recieverUserId)
+            // :
             ref.read(chatControllerProvider).chatStream(widget.recieverUserId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -48,18 +76,50 @@ class _ChatListState extends ConsumerState<ChatList> {
             itemBuilder: (context, index) {
               final messageData = snapshot.data![index];
               var timeSent = DateFormat.Hm().format(messageData.timeSent);
+
+              // if (!messageData.isSeen &&
+              //     messageData.recieverid ==
+              //         FirebaseAuth.instance.currentUser!.uid) {
+              //   ref.read(chatControllerProvider).setChatMessageSeen(
+              //         context,
+              //         widget.recieverUserId,
+              //         messageData.messageId,
+              //       );
+              // }
               if (messageData.senderId ==
                   FirebaseAuth.instance.currentUser!.uid) {
                 return MyMessageCard(
                   message: messageData.text,
                   date: timeSent,
                   type: messageData.type,
+                  repliedText: messageData.repliedMessage,
+                  username: messageData.repliedTo,
+                  repliedMessageType: messageData.repliedMessageType,
+                  onLeftSwipe: () {
+                    ref
+                        .read(messageReplyProvider.notifier)
+                        .update((state) => MessageReply(
+                              messageData.text,
+                              true,
+                              messageData.type,
+                            ));
+                    print('sec');
+                  },
+                  isSeen: messageData.isSeen,
                 );
               }
               return SenderMessageCard(
                 message: messageData.text,
                 date: timeSent,
                 type: messageData.type,
+                username: messageData.repliedTo,
+                repliedMessageType: messageData.repliedMessageType,
+                onRightSwipe: () => onMessageSwipe(
+                  messageData.text,
+                  false,
+                  messageData.type,
+                ),
+                repliedText: messageData.repliedMessage,
               );
             },
           );

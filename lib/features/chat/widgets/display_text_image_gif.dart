@@ -49,7 +49,7 @@ class DisplayTextImageGIF extends StatelessWidget {
                     }
                   },
                   icon: Icon(
-                    Icons.play_circle,
+                    isPlaying ? Icons.pause_circle : Icons.play_circle,
                   ),
                 );
               })
