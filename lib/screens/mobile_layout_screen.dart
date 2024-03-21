@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chat_app/colors.dart';
 import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/features/auth/controller/auth_controller.dart';
+import 'package:chat_app/features/group/screens/create_group_screen.dart';
 import 'package:chat_app/features/select_contacts/screens/select_contacts_screen.dart';
 import 'package:chat_app/features/chat/widgets/contacts_list.dart';
 import 'package:chat_app/features/status/screens/confirm_status_screen.dart';
@@ -72,9 +73,22 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
             ),
-            IconButton(
-              icon: const Icon(Icons.more_vert, color: Colors.grey),
-              onPressed: () {},
+            PopupMenuButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.grey,
+              ),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text(
+                    'Create Group',
+                  ),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(
+                        context, CreateGroupScreen.routeName),
+                  ),
+                )
+              ],
             ),
           ],
           bottom: TabBar(

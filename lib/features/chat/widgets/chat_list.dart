@@ -46,20 +46,18 @@ class _ChatListState extends ConsumerState<ChatList> {
             messageEnum,
           ),
         );
-    print('test');
-    print('object');
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Message>>(
-        stream:
-            //  widget.isGroupChat
-            // ? ref
-            //     .read(chatControllerProvider)
-            //     .groupChatStream(widget.recieverUserId)
-            // :
-            ref.read(chatControllerProvider).chatStream(widget.recieverUserId),
+        stream: widget.isGroupChat
+            ? ref
+                .read(chatControllerProvider)
+                .groupChatStream(widget.recieverUserId)
+            : ref
+                .read(chatControllerProvider)
+                .chatStream(widget.recieverUserId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Loader();
@@ -103,7 +101,6 @@ class _ChatListState extends ConsumerState<ChatList> {
                               true,
                               messageData.type,
                             ));
-                    // print('sec');
                   },
                   isSeen: messageData.isSeen,
                 );

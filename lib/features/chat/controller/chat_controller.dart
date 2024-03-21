@@ -5,6 +5,7 @@ import 'package:chat_app/common/providers/message_replay_provider.dart';
 import 'package:chat_app/features/auth/controller/auth_controller.dart';
 import 'package:chat_app/features/chat/repositories/chat_repository.dart';
 import 'package:chat_app/models/chat_contact.dart';
+import 'package:chat_app/models/group.dart';
 import 'package:chat_app/models/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,17 +30,17 @@ class ChatController {
     return chatRepository.getChatContacts();
   }
 
-  // Stream<List<Group>> chatGroups() {
-  //   return chatRepository.getChatGroups();
-  // }
+  Stream<List<Group>> chatGroups() {
+    return chatRepository.getChatGroups();
+  }
 
   Stream<List<Message>> chatStream(String recieverUserId) {
     return chatRepository.getChatStream(recieverUserId);
   }
 
-  // Stream<List<Message>> groupChatStream(String groupId) {
-  //   return chatRepository.getGroupChatStream(groupId);
-  // }
+  Stream<List<Message>> groupChatStream(String groupId) {
+    return chatRepository.getGroupChatStream(groupId);
+  }
 
   void sendTextMessage(
     BuildContext context,
@@ -55,7 +56,7 @@ class ChatController {
             recieverUserId: recieverUserId,
             senderUser: value!,
             messageReply: messageReply,
-            // isGroupChat: isGroupChat,
+            isGroupChat: isGroupChat,
           ),
         );
     ref.read(messageReplyProvider.notifier).update((state) => null);
@@ -78,7 +79,7 @@ class ChatController {
             messageEnum: messageEnum,
             ref: ref,
             messageReply: messageReply,
-            // isGroupChat: isGroupChat,
+            isGroupChat: isGroupChat,
           ),
         );
     ref.read(messageReplyProvider.notifier).update((state) => null);
@@ -102,7 +103,7 @@ class ChatController {
             recieverUserId: recieverUserId,
             senderUser: value!,
             messageReply: messageReply,
-            // isGroupChat: isGroupChat,
+            isGroupChat: isGroupChat,
           ),
         );
     ref.read(messageReplyProvider.notifier).update((state) => null);
