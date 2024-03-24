@@ -1,7 +1,7 @@
 import 'package:chat_app/common/enums/message_enum.dart';
 import 'package:chat_app/features/chat/widgets/display_text_image_gif.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_app/colors.dart';
+import 'package:chat_app/common/utils/colors.dart';
 import 'package:swipe_to/swipe_to.dart';
 
 class SenderMessageCard extends StatelessWidget {

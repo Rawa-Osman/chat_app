@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chat_app/colors.dart';
+import 'package:chat_app/common/utils/colors.dart';
 import 'package:chat_app/features/status/controller/status_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

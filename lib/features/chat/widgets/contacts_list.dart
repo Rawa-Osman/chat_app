@@ -3,7 +3,7 @@ import 'package:chat_app/features/chat/controller/chat_controller.dart';
 import 'package:chat_app/models/chat_contact.dart';
 import 'package:chat_app/models/group.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_app/colors.dart';
+import 'package:chat_app/common/utils/colors.dart';
 import 'package:chat_app/features/chat/screens/mobile_chat_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';

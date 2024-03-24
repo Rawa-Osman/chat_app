@@ -9,10 +9,8 @@ import 'package:chat_app/router.dart';
 import 'package:chat_app/features/chat/screens/mobile_chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_app/colors.dart';
-import 'package:chat_app/screens/mobile_layout_screen.dart';
-import 'package:chat_app/screens/web_layout_screen.dart';
-import 'package:chat_app/utils/responsive_layout.dart';
+import 'package:chat_app/common/utils/colors.dart';
+import 'package:chat_app/mobile_layout_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // C:\Users\rawa>flutter --version

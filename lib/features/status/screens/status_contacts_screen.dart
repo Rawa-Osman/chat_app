@@ -1,4 +1,4 @@
-import 'package:chat_app/colors.dart';
+import 'package:chat_app/common/utils/colors.dart';
 import 'package:chat_app/common/widgets/loader.dart';
 import 'package:chat_app/features/status/controller/status_controller.dart';
 import 'package:chat_app/features/status/screens/status_screen.dart';

@@ -1,4 +1,4 @@
-import 'package:chat_app/colors.dart';
+import 'package:chat_app/common/utils/colors.dart';
 import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/common/widgets/custom_button.dart';
 import 'package:chat_app/features/auth/controller/auth_controller.dart';
