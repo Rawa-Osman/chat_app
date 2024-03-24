@@ -28,7 +28,7 @@ class DisplayTextImageGIF extends StatelessWidget {
         : type == MessageEnum.audio
             ? StatefulBuilder(builder: (context, setState) {
                 return IconButton(
-                  constraints: BoxConstraints(
+                  constraints: const BoxConstraints(
                     minWidth: 100,
                   ),
                   onPressed: () async {

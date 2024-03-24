@@ -42,6 +42,7 @@ class SelectContactRepository {
         // print(selectedContact.phones[0].number);
         if (selectedPhoneNum == userData.phoneNumber) {
           isFound = true;
+          // ignore: use_build_context_synchronously
           Navigator.pushNamed(
             context,
             MobileChatScreen.routeName,
@@ -54,12 +55,14 @@ class SelectContactRepository {
       }
 
       if (!isFound) {
+        // ignore: use_build_context_synchronously
         showSnackBar(
           context: context,
           content: 'This number does not exist on this app.',
         );
       }
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }

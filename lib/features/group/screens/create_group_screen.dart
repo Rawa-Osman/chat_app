@@ -4,7 +4,6 @@ import 'package:chat_app/common/utils/colors.dart';
 import 'package:chat_app/common/utils/utils.dart';
 import 'package:chat_app/features/group/controller/group_controller.dart';
 import 'package:chat_app/features/group/widgets/select_contacts_group.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,6 +32,7 @@ class _CreateGroupScreenState extends ConsumerState<CreateGroupScreen> {
             image!,
             ref.read(selectedGroupContacts),
           );
+      // ignore: deprecated_member_use
       ref.read(selectedGroupContacts.state).update((state) => []);
       Navigator.pop(context);
     }

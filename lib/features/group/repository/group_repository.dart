@@ -70,6 +70,7 @@ class GroupRepository {
 
       await firestore.collection('groups').doc(groupId).set(group.toMap());
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }

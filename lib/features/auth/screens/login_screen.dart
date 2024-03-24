@@ -20,16 +20,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   void dispose() {
     phoneController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
-  void PickCountry() {
+  void pickCountry() {
     showCountryPicker(
         context: context,
-        onSelect: (Country _country) {
+        onSelect: (Country country) {
           setState(() {
-            country = _country;
+            country = country;
           });
         });
   }
@@ -69,7 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   height: 10,
                 ),
                 TextButton(
-                  onPressed: PickCountry,
+                  onPressed: pickCountry,
                   child: const Text('Pick Country'),
                 ),
                 const SizedBox(

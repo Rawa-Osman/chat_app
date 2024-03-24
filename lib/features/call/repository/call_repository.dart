@@ -40,6 +40,7 @@ class CallRepository {
           .doc(senderCallData.receiverId)
           .set(receiverCallData.toMap());
 
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -51,6 +52,7 @@ class CallRepository {
         ),
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }
@@ -79,6 +81,7 @@ class CallRepository {
             .set(receiverCallData.toMap());
       }
 
+      // ignore: use_build_context_synchronously
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -90,6 +93,7 @@ class CallRepository {
         ),
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }
@@ -103,6 +107,7 @@ class CallRepository {
       await firestore.collection('call').doc(callerId).delete();
       await firestore.collection('call').doc(receiverId).delete();
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }
@@ -121,6 +126,7 @@ class CallRepository {
         await firestore.collection('call').doc(id).delete();
       }
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }

@@ -22,6 +22,7 @@ Future<File?> pickImageFromGallery(BuildContext context) async {
       image = File(pickedImage.path);
     }
   } catch (e) {
+    // ignore: use_build_context_synchronously
     showSnackBar(context: context, content: e.toString());
   }
   return image;
@@ -37,6 +38,7 @@ Future<File?> pickVideoFromGallery(BuildContext context) async {
       video = File(pickedVideo.path);
     }
   } catch (e) {
+    // ignore: use_build_context_synchronously
     showSnackBar(context: context, content: e.toString());
   }
   return video;
@@ -49,6 +51,7 @@ Future<GiphyGif?> pickGIF(BuildContext context) async {
     gif = await Giphy.getGif(
         context: context, apiKey: 'Yp15ULI3fzMFWWqM7m55ym7pK5vbK0e4');
   } catch (e) {
+    // ignore: use_build_context_synchronously
     showSnackBar(context: context, content: e.toString());
   }
   return gif;

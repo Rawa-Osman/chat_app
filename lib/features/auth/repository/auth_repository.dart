@@ -57,6 +57,7 @@ class AuthRepository {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.message!);
     }
   }
@@ -72,12 +73,14 @@ class AuthRepository {
         smsCode: userOTP,
       );
       await auth.signInWithCredential(credential);
+      // ignore: use_build_context_synchronously
       Navigator.pushNamedAndRemoveUntil(
         context,
         UserInformationScreen.routeName,
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.message!);
     }
   }
@@ -113,6 +116,7 @@ class AuthRepository {
 
       await firestore.collection('users').doc(uid).set(user.toMap());
 
+      // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -121,6 +125,7 @@ class AuthRepository {
         (route) => false,
       );
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
   }

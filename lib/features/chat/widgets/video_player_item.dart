@@ -14,7 +14,6 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
   bool isPlay = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     videoPlayerController = CachedVideoPlayerController.network(widget.videoUrl)
       ..initialize().then((value) {
@@ -24,7 +23,6 @@ class _VideoPlayerItemState extends State<VideoPlayerItem> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     videoPlayerController.dispose();
   }
