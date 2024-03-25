@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';
-  const LoginScreen({super.key});
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
@@ -17,18 +17,19 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final phoneController = TextEditingController();
   Country? country;
+
   @override
   void dispose() {
-    phoneController.dispose();
     super.dispose();
+    phoneController.dispose();
   }
 
   void pickCountry() {
     showCountryPicker(
         context: context,
-        onSelect: (Country country) {
+        onSelect: (Country _country) {
           setState(() {
-            country = country;
+            country = _country;
           });
         });
   }
@@ -36,68 +37,62 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void sendPhoneNumber() {
     String phoneNumber = phoneController.text.trim();
     if (country != null && phoneNumber.isNotEmpty) {
-      // provider ref -> intract provider with provider
-      // widget ref -> make widget intract with provider // also it is an object
       ref
           .read(authControllerProvider)
           .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
     } else {
-      showSnackBar(context: context, content: 'fill out all the fields');
+      showSnackBar(context: context, content: 'Fill out all the fields');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Enter your phone number'),
         elevation: 0,
         backgroundColor: backgroundColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                const Text('VerbalVibe will need to verify your phone number'),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextButton(
-                  onPressed: pickCountry,
-                  child: const Text('Pick Country'),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Row(
-                  children: [
-                    if (country != null) Text('+${country!.phoneCode}'),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    SizedBox(
-                      width: size.width * 0.75,
-                      child: TextField(
-                        keyboardType: TextInputType.phone,
-                        controller: phoneController,
-                        decoration:
-                            const InputDecoration(hintText: 'Phone number'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text('WhatsApp will need to verify your phone number.'),
+              const SizedBox(height: 10),
+              TextButton(
+                onPressed: pickCountry,
+                child: const Text('Pick Country'),
+              ),
+              const SizedBox(height: 5),
+              Row(
+                children: [
+                  if (country != null) Text('+${country!.phoneCode}'),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: size.width * 0.7,
+                    child: TextField(
+                      controller: phoneController,
+                      decoration: const InputDecoration(
+                        hintText: 'phone number',
                       ),
-                    )
-                  ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: size.height * 0.6),
+              SizedBox(
+                width: 90,
+                child: CustomButton(
+                  onPressed: sendPhoneNumber,
+                  text: 'NEXT',
                 ),
-              ],
-            ),
-            SizedBox(
-              width: 90,
-              child: CustomButton(text: 'Next', onPressed: sendPhoneNumber),
-            )
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
