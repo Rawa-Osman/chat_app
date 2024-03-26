@@ -22,7 +22,7 @@ class LandingScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
               const Text(
-                'Welcome to VerbalVibe',
+                'Welcome to ChatApp',
                 style: TextStyle(
                   fontSize: 33,
                   fontWeight: FontWeight.w600,

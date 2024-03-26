@@ -20,6 +20,8 @@ class MobileLayoutScreen extends ConsumerStatefulWidget {
 
 class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
     with WidgetsBindingObserver, TickerProviderStateMixin {
+  bool isChatTabSelected = true; // Add this variable to track the selected tab
+
   late TabController tabBarController;
   @override
   void initState() {
@@ -61,7 +63,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           backgroundColor: appBarColor,
           centerTitle: false,
           title: const Text(
-            'VerbalVibe',
+            'ChatApp',
             style: TextStyle(
               fontSize: 20,
               color: Colors.grey,
@@ -107,10 +109,16 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
               Tab(
                 text: 'STATUS',
               ),
-              Tab(
-                text: 'CALLS',
-              ),
+              // Tab(
+              //   text: 'CALLS',
+              // ),
             ],
+            onTap: (index) {
+              setState(() {
+                // Update the variable to track the selected tab
+                isChatTabSelected = index == 0;
+              });
+            },
           ),
         ),
         body: TabBarView(
@@ -118,7 +126,7 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           children: const [
             ContactsList(),
             StatusContactsScreen(),
-            Text('calls'),
+            // Text('calls'),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -135,8 +143,10 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             }
           },
           backgroundColor: tabColor,
-          child: const Icon(
-            Icons.comment,
+          child: Icon(
+            isChatTabSelected
+                ? Icons.comment
+                : Icons.add, // Use the variable to set the icon
             color: Colors.white,
           ),
         ),

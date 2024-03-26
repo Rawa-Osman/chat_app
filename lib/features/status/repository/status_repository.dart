@@ -115,40 +115,55 @@ class StatusRepository {
 
   Future<List<Status>> getStatus(BuildContext context) async {
     List<Status> statusData = [];
+
     try {
-      List<Contact> contacts = [];
-      if (await FlutterContacts.requestPermission()) {
-        contacts = await FlutterContacts.getContacts(withProperties: true);
-      }
-      for (int i = 0; i < contacts.length; i++) {
-        var statusesSnapshot = await firestore
-            .collection('status')
-            .where(
-              'phoneNumber',
-              isEqualTo: contacts[i].phones[0].number.replaceAll(
-                    ' ',
-                    '',
-                  ),
-            )
-            .where(
-              'createdAt',
-              isGreaterThan: DateTime.now()
-                  .subtract(const Duration(hours: 24))
-                  .millisecondsSinceEpoch,
-            )
-            .get();
-        for (var tempData in statusesSnapshot.docs) {
-          Status tempStatus = Status.fromMap(tempData.data());
-          if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {
-            statusData.add(tempStatus);
-          }
-        }
+      // Request permission and get contacts
+      List<Contact> contacts = await _getContacts();
+
+      // Fetch statuses for each contact
+      for (Contact contact in contacts) {
+        List<Status> statuses = await _getStatusesForContact(contact);
+        statusData.addAll(statuses);
       }
     } catch (e) {
+      // Handle errors
       if (kDebugMode) print(e);
-      // ignore: use_build_context_synchronously
       showSnackBar(context: context, content: e.toString());
     }
+
     return statusData;
+  }
+
+  Future<List<Contact>> _getContacts() async {
+    if (await FlutterContacts.requestPermission()) {
+      return FlutterContacts.getContacts(withProperties: true);
+    }
+    return [];
+  }
+
+  Future<List<Status>> _getStatusesForContact(Contact contact) async {
+    List<Status> statuses = [];
+    var statusesSnapshot = await firestore
+        .collection('status')
+        .where(
+          'phoneNumber',
+          isEqualTo: contact.phones[0].number.replaceAll(' ', ''),
+        )
+        .where(
+          'createdAt',
+          isGreaterThan: DateTime.now()
+              .subtract(const Duration(hours: 24))
+              .millisecondsSinceEpoch,
+        )
+        .get();
+
+    for (var tempData in statusesSnapshot.docs) {
+      Status tempStatus = Status.fromMap(tempData.data());
+      if (tempStatus.whoCanSee.contains(auth.currentUser!.uid)) {
+        statuses.add(tempStatus);
+      }
+    }
+
+    return statuses;
   }
 }

@@ -19,7 +19,6 @@ final selectContactControllerProvider = Provider((ref) {
 class SelectContactController {
   final ProviderRef ref;
   final SelectContactRepository selectContactRepository;
-
   SelectContactController({
     required this.ref,
     required this.selectContactRepository,

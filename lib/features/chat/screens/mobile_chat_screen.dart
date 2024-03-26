@@ -62,18 +62,21 @@ class MobileChatScreen extends ConsumerWidget {
                   }),
           centerTitle: false,
           actions: [
-            IconButton(
-              onPressed: () => makeCall(ref, context),
-              icon: const Icon(Icons.video_call),
+            Padding(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: IconButton(
+                onPressed: () => makeCall(ref, context),
+                icon: const Icon(Icons.video_call),
+              ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.call),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.more_vert),
-            ),
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: const Icon(Icons.call),
+            // ),
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: const Icon(Icons.more_vert),
+            // ),
           ],
         ),
         body: Column(
